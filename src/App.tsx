@@ -1,9 +1,10 @@
 import React from 'react';
-import { GlobalStyle } from './styles/global';
+import { GlobalStyle } from './styled-components/global';
+import { SignupPage } from './pages/signup/signup.page.';
 
 export const App = () => (
   <>
-    <h1>Ricardo</h1>
+    <SignupPage />
     <GlobalStyle />
   </>
 );

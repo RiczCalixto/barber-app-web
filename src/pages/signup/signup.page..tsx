@@ -5,6 +5,7 @@ import {
   Background,
 } from '../../styled-components/components';
 import appLogo from '../../assets/logo.svg';
+import { FiLogIn } from 'react-icons/fi';
 
 export const SignupPage: React.FC = () => {
   return (
@@ -18,7 +19,10 @@ export const SignupPage: React.FC = () => {
           <button type="submit">Entrar</button>
           <a href="forgot">Esqueci minha senha</a>
         </form>
-        
+        <a href="http://">
+          <FiLogIn />
+          Criar conta
+        </a>
       </Content>
       <Background />
     </Container>

@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     ${tw`bg-gray-900 text-white antialiased`}
   }
   body, input, button {
-    ${tw`font-sans text-4xl`}
+    ${tw`font-sans text-base`}
   }
   h1, h2, h3, h4, h5, h6, strong {
     ${tw`font-medium`}

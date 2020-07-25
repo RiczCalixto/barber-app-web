@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import signInBackgroundImg from '../assets/sign-in-background.png';
+import signUpBackgroundImg from '../assets/sign-up-background.png';
 
 export const Container = styled.div`
   ${tw`h-screen flex items-stretch`}
@@ -29,10 +30,17 @@ export const Content = styled.div`
   }
 `;
 
+interface BackgroundProps {
+  isSignUpPage?: boolean;
+}
+
 export const Background = styled.div`
-  ${tw`flex-1 bg-cover bg-no-repeat bg-center`}
-  background: url(${signInBackgroundImg});
-  `;
+  background: ${(props: BackgroundProps) =>
+    props.isSignUpPage
+      ? `url(${signUpBackgroundImg})`
+      : `url(${signInBackgroundImg})`};
+  ${tw`flex-1 bg-cover bg-no-repeat bg-center`};
+`;
 
 export const StyledButton = styled.button`
   ${tw`bg-transparent hover:bg-orange-500 text-gray-500 font-semibold

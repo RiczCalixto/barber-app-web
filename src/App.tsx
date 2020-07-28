@@ -5,8 +5,8 @@ import { SignUpPage } from './pages/sign-up/sign-up.page';
 
 export const App = () => (
   <>
-    <SignUpPage />
     <SignInPage />
+    <SignUpPage />
     <GlobalStyle />
   </>
 );

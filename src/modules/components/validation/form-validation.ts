@@ -1,12 +1,11 @@
 import * as Yup from 'yup';
 import { SignUpData, SignInData } from '../../../model/forms.model';
 import { Strings } from './validation.strings';
-import { FormHandles } from '@unform/core';
-import { throws } from 'assert';
 
 const {
   requiredEmail,
   requiredName,
+  requiredPassword,
   validEmail,
   validPassword,
 } = Strings.Form.Error;
@@ -23,7 +22,7 @@ export const signUpFormValidation = async (data: SignUpData) => {
 export const signInFormValidation = async (data: SignInData) => {
   const schema = Yup.object().shape({
     email: Yup.string().required(requiredEmail).email(validEmail),
-    password: Yup.string().min(6, validPassword),
+    password: Yup.string().required(requiredPassword),
   });
 
   await schema.validate(data, { abortEarly: false });

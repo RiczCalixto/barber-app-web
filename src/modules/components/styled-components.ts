@@ -66,7 +66,7 @@ export const StyledInputContainer = styled.div<StyledInputContainerProps>`
 
   svg {
     ${tw`mr-5`}
-    ${({ hasError }) => hasError && tw`text-red-500`};
+    ${({ hasError }) => hasError && tw`text-red-700`};
     ${({ isFilled }) => isFilled && tw`text-orange-500`};
     ${({ isFocused }) => isFocused && tw`text-orange-500`};
   }
@@ -114,7 +114,7 @@ export const ErrorContainer = styled(Tooltip)`
     ${tw`m-0`}
   }
   span {
-    ${tw`bg-red-700 text-white`}
+    ${tw`bg-gray-900 text-white border border-red-700`}
 
     &::before {
       border-color: #c53030 transparent;

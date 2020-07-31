@@ -1,30 +1,40 @@
 import React, { useCallback, useRef } from 'react';
-import {
-  Content,
-  Container,
-  Background,
-} from '../../components/styled-components';
-import appLogo from '../../../assets/logo.svg';
-import { FiLogIn, FiLock, FiMail } from 'react-icons/fi';
-import { Button } from '../../components/Button.component';
-import { Input } from '../../components/Input.component';
 import { Form } from '@unform/web';
-import { SignInData } from '../../../model/forms.model';
-import {
-  signInFormValidation,
-  getValidationErrors,
-} from '../../components/validation/form-validation';
 import { FormHandles } from '@unform/core/typings/types';
+import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
+import {
+  getValidationErrors,
+  signInFormValidation,
+} from '../../components/validation/form-validation';
+import {
+  Background,
+  Container,
+  Content,
+} from '../../components/styled-components';
+import { useAuth } from '../../../context/auth-context';
+import { Button } from '../../components/Button.component';
+
+import { Input } from '../../components/Input.component';
+import appLogo from '../../../assets/logo.svg';
+import { SignInData } from '../../../model/auth-context.model';
 
 export const SignInPage: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(async (data: SignInData): Promise<void> => {
-    try {
-      await signInFormValidation(data);
-    } catch (error) {
-      formRef.current?.setErrors(getValidationErrors(error));
-    }
-  }, []);
+  const { user, signIn } = useAuth();
+  console.log(user);
+  const handleSubmit = useCallback(
+    async (data: SignInData): Promise<void> => {
+      try {
+        formRef.current?.setErrors({});
+        await signInFormValidation(data);
+        signIn({ email: data.email, password: data.password });
+      } catch (error) {
+        formRef.current?.setErrors(getValidationErrors(error));
+      }
+    },
+
+    [signIn],
+  );
 
   return (
     <Container>

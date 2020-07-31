@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { SignUpData, SignInData } from '../../../model/forms.model';
+import { SignUpData, SignInData } from '../../../model/auth-context.model';
 import { Strings } from './validation.strings';
 
 const {

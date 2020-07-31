@@ -1,20 +1,20 @@
-import React, { useCallback, useRef, MutableRefObject } from 'react';
+import React, { useCallback, useRef } from 'react';
+import { Form } from '@unform/web';
+import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
+import { FormHandles } from '@unform/core';
 import {
   Content,
   Container,
   Background,
 } from '../../components/styled-components';
 import appLogo from '../../../assets/logo.svg';
-import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { Button } from '../../components/Button.component';
 import { Input } from '../../components/Input.component';
-import { Form } from '@unform/web';
-import { SignUpData } from '../../../model/forms.model';
+import { SignUpData } from '../../../model/auth-context.model';
 import {
   signUpFormValidation,
   getValidationErrors,
 } from '../../components/validation/form-validation';
-import { FormHandles } from '@unform/core';
 
 export const SignUpPage: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
@@ -29,7 +29,7 @@ export const SignUpPage: React.FC = () => {
 
   return (
     <Container>
-      <Background isSignUpPage={true} />
+      <Background isSignUpPage />
       <Content>
         <img src={appLogo} alt="Barber App" />
         <Form ref={formRef} onSubmit={handleSubmit}>

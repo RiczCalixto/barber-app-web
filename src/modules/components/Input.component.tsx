@@ -6,9 +6,9 @@ import React, {
   useCallback,
 } from 'react';
 import { IconBaseProps } from 'react-icons/lib';
-import { StyledInputContainer, ErrorContainer } from './styled-components';
 import { useField } from '@unform/core';
 import { FiAlertCircle } from 'react-icons/fi';
+import { StyledInputContainer, ErrorContainer } from './styled-components';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -27,8 +27,6 @@ export const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
       path: 'value',
     });
   }, [fieldName, registerField]);
-
-  console.log('err do input', error);
 
   const handleInputFocus = useCallback(() => {
     setFocus(true);

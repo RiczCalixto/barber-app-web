@@ -17,25 +17,32 @@ import { Button } from '../../components/Button.component';
 import { Input } from '../../components/Input.component';
 import appLogo from '../../../assets/logo.svg';
 import { SignInData } from '../../../model/auth-context.model';
+import { useToast } from '../../../hooks/toast-context';
 
 export const SignInPage: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { user, signIn } = useAuth();
+  const { addToast, removeToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignInData): Promise<void> => {
       try {
         formRef.current?.setErrors({});
         await signInFormValidation(data);
-        signIn({ email: data.email, password: data.password });
+        await signIn({ email: data.email, password: data.password });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           formRef.current?.setErrors(getValidationErrors(error));
         }
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+        });
       }
     },
 
-    [signIn],
+    [signIn, addToast],
   );
 
   return (

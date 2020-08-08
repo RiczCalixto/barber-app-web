@@ -122,7 +122,7 @@ export const ErrorContainer = styled(Tooltip)`
   }
 `;
 
-export const ToastContainer = styled.div`
+export const ToastStyledContainer = styled.div`
   ${tw`absolute right-0 top-0 overflow-hidden p-6`}
 `;
 

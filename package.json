@@ -17,6 +17,8 @@
     "styled-components": "^5.1.1",
     "twin.macro": "^1.6.1",
     "typescript": "~3.7.2",
+    "uuid": "^8.3.0",
+    "uuidv4": "^6.2.2",
     "yup": "^0.29.2"
   },
   "scripts": {

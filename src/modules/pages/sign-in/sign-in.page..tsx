@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core/typings/types';
 import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
+import * as Yup from 'yup';
 import {
   getValidationErrors,
   signInFormValidation,
@@ -11,9 +12,8 @@ import {
   Container,
   Content,
 } from '../../components/styled-components';
-import { useAuth } from '../../../context/auth-context';
+import { useAuth } from '../../../hooks/auth-context';
 import { Button } from '../../components/Button.component';
-
 import { Input } from '../../components/Input.component';
 import appLogo from '../../../assets/logo.svg';
 import { SignInData } from '../../../model/auth-context.model';
@@ -21,7 +21,7 @@ import { SignInData } from '../../../model/auth-context.model';
 export const SignInPage: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const { user, signIn } = useAuth();
-  console.log(user);
+
   const handleSubmit = useCallback(
     async (data: SignInData): Promise<void> => {
       try {
@@ -29,7 +29,9 @@ export const SignInPage: React.FC = () => {
         await signInFormValidation(data);
         signIn({ email: data.email, password: data.password });
       } catch (error) {
-        formRef.current?.setErrors(getValidationErrors(error));
+        if (error instanceof Yup.ValidationError) {
+          formRef.current?.setErrors(getValidationErrors(error));
+        }
       }
     },
 

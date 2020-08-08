@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import tw from 'twin.macro';
 import signInBackgroundImg from '../../assets/sign-in-background.png';
 import signUpBackgroundImg from '../../assets/sign-up-background.png';
@@ -120,4 +120,57 @@ export const ErrorContainer = styled(Tooltip)`
       border-color: #c53030 transparent;
     }
   }
+`;
+
+export const ToastContainer = styled.div`
+  ${tw`absolute right-0 top-0 overflow-hidden p-6`}
+`;
+
+interface ToastStyledProps {
+  type?: 'info' | 'success' | 'error';
+  hasDescription: boolean;
+}
+
+const toastTypeVariations = {
+  info: tw`bg-blue-200 text-blue-800`,
+  success: tw`bg-green-200 text-green-800`,
+  error: tw`bg-red-200 text-red-800`,
+};
+
+export const ToastStyled = styled.div<ToastStyledProps>`
+  ${tw`relative w-64 py-4 pl-4 pr-8 shadow-2xl flex rounded-lg`}
+
+  & + div {
+    margin-top: 8px;
+  }
+
+  ${props => toastTypeVariations[props.type || 'info']}
+
+  > svg {
+    margin: 4px 12px 0 0;
+  }
+
+  div {
+    flex: 1;
+    p {
+      ${tw`mt-2 text-sm opacity-75 leading-5`}
+    }
+  }
+
+  button {
+    position: absolute;
+    right: 16px;
+    top: 19px;
+    opacity: 0.6;
+    color: inherit;
+  }
+
+  ${props =>
+    !props.hasDescription &&
+    css`
+      align-items: center;
+      svg {
+        margin-top: 0;
+      }
+    `}
 `;

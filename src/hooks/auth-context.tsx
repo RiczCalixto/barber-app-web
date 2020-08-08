@@ -37,7 +37,10 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const signOut = () => {
-    console.log('deslogado');
+    localStorage.removeItem(StorageKey.Token);
+    localStorage.removeItem(StorageKey.User);
+
+    setData({} as AuthProviderState);
   };
 
   return (

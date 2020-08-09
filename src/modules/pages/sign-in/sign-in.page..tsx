@@ -1,4 +1,5 @@
 import React, { useCallback, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core/typings/types';
 import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
@@ -33,6 +34,7 @@ export const SignInPage: React.FC = () => {
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           formRef.current?.setErrors(getValidationErrors(error));
+          return;
         }
         addToast({
           type: 'error',
@@ -59,12 +61,12 @@ export const SignInPage: React.FC = () => {
             icon={FiLock}
           />
           <Button type="submit">Entrar</Button>
-          <a href="forgot">Esqueci minha senha</a>
+          <a href="/forgot">Esqueci minha senha</a>
         </Form>
-        <a href="http://">
+        <Link to="/signup">
           <FiLogIn />
           Criar conta
-        </a>
+        </Link>
       </Content>
       <Background />
     </Container>

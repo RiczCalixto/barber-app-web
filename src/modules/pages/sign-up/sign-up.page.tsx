@@ -2,6 +2,7 @@ import React, { useCallback, useRef } from 'react';
 import { Form } from '@unform/web';
 import { FiArrowLeft, FiLock, FiMail, FiUser } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
+import { Link } from 'react-router-dom';
 import {
   Content,
   Container,
@@ -44,10 +45,10 @@ export const SignUpPage: React.FC = () => {
           />
           <Button type="submit">Cadastrar</Button>
         </Form>
-        <a href="http://">
+        <Link to="/">
           <FiArrowLeft />
           Voltar para o login
-        </a>
+        </Link>
       </Content>
     </Container>
   );

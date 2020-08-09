@@ -5,6 +5,7 @@ import {
   FiInfo,
   FiXCircle,
 } from 'react-icons/fi';
+import { useTransition } from 'react-spring';
 import { ToastStyledContainer, ToastStyled } from './styled-components';
 import { ToastMessagesState } from '../../model/toast-context.model';
 import { useToast } from '../../hooks/toast-context';
@@ -15,6 +16,7 @@ interface ToastContainerProps {
 
 interface ToastProps {
   toast: ToastMessagesState;
+  style: object;
 }
 
 const icons = {
@@ -23,7 +25,7 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 };
 
-export const Toast: React.FC<ToastProps> = ({ toast }) => {
+export const Toast: React.FC<ToastProps> = ({ toast, style }) => {
   const { removeToast } = useToast();
   const { description, title, id, type } = toast;
 
@@ -40,7 +42,7 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
   };
 
   return (
-    <ToastStyled hasDescription={!!description} type={type}>
+    <ToastStyled hasDescription={!!description} type={type} style={style}>
       {icons[type || 'info']}
       <div>
         <strong>{title}</strong>
@@ -53,10 +55,22 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
   );
 };
 
-export const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => (
-  <ToastStyledContainer>
-    {messages.map(message => (
-      <Toast key={message.id} toast={message} />
-    ))}
-  </ToastStyledContainer>
-);
+export const ToastContainer: React.FC<ToastContainerProps> = ({ messages }) => {
+  const messagesWithTransition = useTransition(
+    messages,
+    message => message.id,
+    {
+      from: { right: '-120%', opacity: 0 },
+      enter: { right: '0%', opacity: 1 },
+      leave: { right: '-120%', opacity: 0 },
+    },
+  );
+
+  return (
+    <ToastStyledContainer>
+      {messagesWithTransition.map(({ item, key, props }) => (
+        <Toast key={key} toast={item} style={props} />
+      ))}
+    </ToastStyledContainer>
+  );
+};

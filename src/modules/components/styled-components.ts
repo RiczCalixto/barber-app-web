@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { animated } from 'react-spring';
 import tw from 'twin.macro';
 import signInBackgroundImg from '../../assets/sign-in-background.png';
 import signUpBackgroundImg from '../../assets/sign-up-background.png';
@@ -137,7 +138,7 @@ const toastTypeVariations = {
   error: tw`bg-red-200 text-red-800`,
 };
 
-export const ToastStyled = styled.div<ToastStyledProps>`
+export const ToastStyled = styled(animated.div)<ToastStyledProps>`
   ${tw`relative w-64 py-4 pl-4 pr-8 shadow-2xl flex rounded-lg`}
 
   & + div {

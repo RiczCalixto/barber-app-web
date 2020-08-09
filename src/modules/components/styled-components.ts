@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { animated } from 'react-spring';
 import tw from 'twin.macro';
 import signInBackgroundImg from '../../assets/sign-in-background.png';
@@ -9,8 +9,20 @@ export const Container = styled.div`
   ${tw`h-screen flex items-stretch`};
 `;
 
+const appearFromTop = keyframes`
+  from{
+    opcaity: 0;
+    transform: translateY(-50px);
+  };
+  to{
+    opcaity: 1;
+    transform: translateY(0);
+  };
+`;
+
 export const Content = styled.div`
   ${tw`flex flex-col justify-center items-center w-full max-w-screen-md`};
+  animation: ${appearFromTop} 1s;
 
   form {
     ${tw`my-16 flex flex-col w-64 text-center`};
